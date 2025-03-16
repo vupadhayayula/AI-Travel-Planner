@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Travel Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="main-container">
+        <h1>AI Travel Planner ✈️</h1>
+        <div class="planner-container">
+            <div class="form-section">
+                <h2>Customize Your Trip</h2>
+
+                <label>Travel Type</label>
+                <select id="travelType">
+                    <option value="Leisure">Leisure</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Business">Business</option>
+                </select>
+
+                <label>Interests</label>
+                <select id="interests">
+                    <option value="">Select Interests</option>
+                    <option value="Nature">Nature</option>
+                    <option value="History">History</option>
+                    <option value="Food">Food</option>
+                    <option value="Shopping">Shopping</option>
+                </select>
+
+                <label>Preferred Season</label>
+                <select id="season">
+                    <option value="Summer">Summer</option>
+                    <option value="Winter">Winter</option>
+                    <option value="Spring">Spring</option>
+                    <option value="Autumn">Autumn</option>
+                </select>
+
+                <label>Duration (days)</label>
+                <input type="range" id="duration" min="1" max="13" value="7" oninput="updateDurationValue(this.value)">
+                <span id="durationValue">7 days</span>
+
+                <label>Budget</label>
+                <select id="budget">
+                    <option value="$100-$500">$100 - $500</option>
+                    <option value="$500-$1000">$500 - $1000</option>
+                    <option value="$1000-$2000">$1000 - $2000</option>
+                </select>
+
+                <button onclick="generatePlan()">🧭 Generate Plan</button>
+            </div>
+
+            <div class="output-section">
+                <h2>✨ Your AI Travel Plan ✨</h2>
+                <p id="response">Let's plan your next journey...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
