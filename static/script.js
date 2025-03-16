@@ -3,11 +3,11 @@ function updateDurationValue(value) {
 }
 
 function generatePlan() {
-    // Show loading message before making the API request
+   
     let responseElement = document.getElementById("response");
     responseElement.innerHTML = "Generating your travel plan... ⏳";
     
-    // Collect user input
+
     const travelData = {
         travelType: document.getElementById("travelType").value,
         interests: document.getElementById("interests").value,
@@ -16,7 +16,7 @@ function generatePlan() {
         budgetRange: document.getElementById("budget").value
     };
 
-    // Send POST request to Flask backend
+ 
     fetch("/generate-plan", {
         method: "POST",
         headers: {
@@ -26,7 +26,7 @@ function generatePlan() {
     })
     .then(response => response.json())
     .then(data => {
-        // Display AI response
+       
         responseElement.innerHTML = `<strong>AI Travel Plan:</strong><br>${data.plan}`;
     })
     .catch(error => {
