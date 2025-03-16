@@ -4,14 +4,14 @@ import os
 from dotenv import load_dotenv
 import time
 
-# Load environment variables
+
 load_dotenv()
 app = Flask(__name__)
-# Ensure Gemini API key is loaded
+
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if not GEMINI_API_KEY:
     raise ValueError("No GEMINI_API_KEY found. Please check the .env file.")
-# ✅ Correct API Endpoint for Gemini-1.5
+
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent"
 def get_gemini_travel_plan(travel_data):
     """Generates a travel plan using Google's Gemini API with retries."""
@@ -33,7 +33,7 @@ def get_gemini_travel_plan(travel_data):
         "contents": [{"role": "user", "parts": [{"text": prompt}]}]
     }
 
-    retries = 3  # Retry up to 3 times
+    retries = 3 
     for attempt in range(retries):
         try:
             response = requests.post(
@@ -41,7 +41,7 @@ def get_gemini_travel_plan(travel_data):
                 headers=headers,
                 json=payload,
                 params={"key": GEMINI_API_KEY},
-                timeout=30  # ✅ Increased timeout to 30 seconds
+                timeout=30 
             )
             response.raise_for_status()
             data = response.json()
@@ -53,7 +53,7 @@ def get_gemini_travel_plan(travel_data):
 
         except requests.exceptions.Timeout:
             print(f"⚠️ Timeout: Retrying... ({attempt + 1}/{retries})")
-            time.sleep(5)  # ✅ Wait 5 seconds before retrying
+            time.sleep(5) 
 
         except requests.exceptions.RequestException as e:
             return f"Error communicating with Gemini API: {e}"
